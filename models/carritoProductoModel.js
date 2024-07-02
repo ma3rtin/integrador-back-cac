@@ -21,6 +21,8 @@ const carritoProductoModel = db.define("carritoproducto",{
             key: "id"
         }
     }
+},{
+    tableName: "carritoproducto"
 });
 
 module.exports = carritoProductoModel;

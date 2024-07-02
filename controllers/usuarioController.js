@@ -1,3 +1,4 @@
+const carritoModel = require("../models/carritoModel.js");
 const usuarioModel = require("../models/usuarioModel.js");
 
 const obtenerUsuarios = async (req, res) =>{
@@ -24,10 +25,34 @@ const registrarUsuario = async (req, res) =>{
         let {nombre, apellido, email, contraseña, genero} = req.body;
         nombre = nombre + " " + apellido;
         const usuario = await usuarioModel.create({nombre, email, contraseña, genero});
+        await carritoModel.create({id_usuario: usuario.id});
         res.json(usuario);
     }catch(error){
         res.json({message: error.message});
     }
-}
+};
 
-module.exports = {obtenerUsuarios, obtenerUsuarioPorId, registrarUsuario};
+const eliminarUsuario = async (req, res)=>{
+    try{
+        const {id} = req.params;
+        await carritoModel.destroy({where: {id_usuario: id}});
+        await usuarioModel.destroy({where: {id}});
+        res.json({message: "Usuario eliminado correctamente"});
+    }catch(error){
+        res.json({message: error.message});
+    }
+};
+
+const actualizarUsuario = async (req, res)=>{
+    try{
+        const {id} = req.params;
+        let {nombre, apellido, email, contraseña, genero} = req.body;
+        nombre = nombre + " " + apellido;
+        await usuarioModel.update({nombre, email, contraseña, genero}, {where: {id}});
+        res.json({message: "Usuario actualizado correctamente"});
+    }catch(error){
+        res.json({message: error.message});
+    }
+};
+
+module.exports = {obtenerUsuarios, obtenerUsuarioPorId, registrarUsuario, eliminarUsuario, actualizarUsuario};
