@@ -5,6 +5,8 @@ require('dotenv').config();
 const usuarioRouter = require("./routes/usuarioRouter.js");
 const productoRouter = require("./routes/productoRouter.js");
 const db = require("./data/db.js");
+const ventaRouter = require('./routes/ventaRouter.js');
+const carritoRouter = require('./routes/carritoRouter.js');
 
 const conexionDB = async () => {
     try {
@@ -30,3 +32,5 @@ app.listen(port, ()=>{
 
 app.use("/user", usuarioRouter);
 app.use("/product", productoRouter);
+app.use("/carrito", carritoRouter);
+app.use("/ventas", ventaRouter);
