@@ -19,4 +19,3 @@ const carritoModel = db.define("carrito", {
 
 module.exports = carritoModel;
 
-module.exports = carritoModel;
