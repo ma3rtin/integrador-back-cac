@@ -20,17 +20,6 @@ const obtenerUsuarioPorId = async (req, res) =>{
     }
 };
 
-const registrarUsuario = async (req, res) =>{
-    try{
-        let {nombre, apellido, email, contraseña, genero} = req.body;
-        nombre = nombre + " " + apellido;
-        const usuario = await usuarioModel.create({nombre, email, contraseña, genero});
-        await carritoModel.create({id_usuario: usuario.id});
-        res.json(usuario);
-    }catch(error){
-        res.json({message: error.message});
-    }
-};
 
 const eliminarUsuario = async (req, res)=>{
     try{
@@ -55,4 +44,4 @@ const actualizarUsuario = async (req, res)=>{
     }
 };
 
-module.exports = {obtenerUsuarios, obtenerUsuarioPorId, registrarUsuario, eliminarUsuario, actualizarUsuario};
+module.exports = {obtenerUsuarios, obtenerUsuarioPorId, registrarUsuario, eliminarUsuario, actualizarUsuario, iniciarSesión};

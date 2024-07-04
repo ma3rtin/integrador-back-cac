@@ -1,6 +1,7 @@
 const express = require('express');
 
 const {obtenerProductos, obtenerProductoPorId, agregarProducto, modificarProducto, eliminarProducto} = require("../controllers/productoController.js");
+const authMiddleware = require('../middlewares/authMiddleware.js');
 
 const productoRouter = express.Router();
 
