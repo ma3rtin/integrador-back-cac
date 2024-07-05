@@ -12,13 +12,13 @@ exports.register = async (req, res) => {
   nombre = nombre + " " + apellido;
 
   const contraseñaHasheada = bcrypt.hashSync(contraseña, 8);
-
-  const usuarioNuevo = await usuarioModel.create(
+  contraseña=contraseñaHasheada
+  const usuarioNuevo = await usuarioModel.create({
     nombre,
     email,
     contraseña,
     genero
-  );
+  });
 
   const token = jwt.sign({ id: usuarioNuevo.id }, config.secretKey, {
     expiresIn: config.tokenExpiresIn,
