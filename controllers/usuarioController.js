@@ -44,4 +44,4 @@ const actualizarUsuario = async (req, res)=>{
     }
 };
 
-module.exports = {obtenerUsuarios, obtenerUsuarioPorId, registrarUsuario, eliminarUsuario, actualizarUsuario, iniciarSesión};
+module.exports = {obtenerUsuarios, obtenerUsuarioPorId, eliminarUsuario, actualizarUsuario};

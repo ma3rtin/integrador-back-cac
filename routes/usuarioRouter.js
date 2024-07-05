@@ -1,6 +1,6 @@
 const express = require('express');
 
-const {obtenerUsuarios, obtenerUsuarioPorId, registrarUsuario, eliminarUsuario, actualizarUsuario, iniciarSesión} = require("../controllers/usuarioController.js");
+const {obtenerUsuarios, obtenerUsuarioPorId, eliminarUsuario, actualizarUsuario} = require("../controllers/usuarioController.js");
 const { register, login } = require('../controllers/authController.js');
 
 const usuarioRouter = express.Router();
