@@ -7,24 +7,29 @@ const usuarioModel = require("../models/usuarioModel.js");
 const config = require("../config/config.js");
 
 exports.register = async (req, res) => {
-  let { nombre, apellido, email, contraseña, genero } = req.body;
+  try{
+    let { nombre, apellido, email, contraseña, genero } = req.body;
 
-  nombre = nombre + " " + apellido;
-
-  const contraseñaHasheada = bcrypt.hashSync(contraseña, 8);
-  contraseña=contraseñaHasheada
-  const usuarioNuevo = await usuarioModel.create({
-    nombre,
-    email,
-    contraseña,
-    genero
-  });
-
-  const token = jwt.sign({ id: usuarioNuevo.id }, config.secretKey, {
-    expiresIn: config.tokenExpiresIn,
-  });
-
-  res.status(200).json(token);
+    nombre = nombre + " " + apellido;
+  
+    const contraseñaHasheada = bcrypt.hashSync(contraseña, 8);
+    contraseña=contraseñaHasheada
+    const usuarioNuevo = await usuarioModel.create({
+      nombre,
+      email,
+      contraseña,
+      genero
+    });
+  
+    const token = jwt.sign({ id: usuarioNuevo.id }, config.secretKey, {
+      expiresIn: config.tokenExpiresIn,
+    });
+  
+    res.status(200).json(token);
+  }catch(error){
+    res.json({ message: error.message });
+  }
+  
 };
 
 exports.login = async (req, res) => {

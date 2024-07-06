@@ -20,6 +20,10 @@ const carritoProductoModel = db.define("carritoproducto",{
             model: productoModel,
             key: "id"
         }
+    },
+    cantidad: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 },{
     tableName: "carritoproducto"
