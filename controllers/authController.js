@@ -51,3 +51,14 @@ exports.login = async (req, res) => {
 
   res.status(200).json(token);
 };
+
+exports.checkLogin = async (req, res) => {
+  const { email } = req.body;
+
+  const usuario = await usuarioModel.findOne({ where: { email } });
+
+  if (!usuario)
+    return res.status(404).json({ message: "Usuario no encontrado" });
+
+  res.status(200).json(usuario.nombre);
+};
